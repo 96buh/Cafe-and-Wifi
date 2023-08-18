@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for cafe in cafes %}
+  <div class="col">
+    <div class="flip-card">
+      <!-- card -->
+      <div
+        class="card h-100 w-100 custom-card flip-card-inner"
+        style="width: 18rem; margin-top: 20px"
+      >
+        <div class="flip-card-front">
+          <img src="{{ cafe.img_url}}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text text-center">{{ cafe.name }}</p>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>coffee price {{ cafe.coffee_price }}</p>
+          {% if cafe.has_sockets == 1%}
+          <p>has sockets ✅</p>
+          {% else %}
+          <p>has sockets ❌</p>
+          {% endif %}
+          {% if cafe.has_toilet == 1%}
+          <p>has toilet ✅</p>
+          {% else %}
+          <p>has toilet ❌</p>
+          {% endif %}
+          {% if cafe.has_wifi == 1%}
+          <p>has wifi ✅</p>
+          {% else %}
+          <p>has wifi ❌</p>
+          {% endif %}
+          {% if cafe.can_take_calls == 1%}
+          <p>take calls ✅</p>
+          {% else %}
+          <p>take calls ❌</p>
+          {% endif %}
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="col">
+            <a href="{{url_for('delete', cafe_id=cafe.id)}}" class="btn btn-outline-light">Delete</a>
+            </div>
+            <div class="col">
+              <a href="{{cafe.map_url}}" class="btn btn-outline-light">Map</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
